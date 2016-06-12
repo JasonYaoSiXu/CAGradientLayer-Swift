@@ -10,6 +10,7 @@ import UIKit
 
 @IBDesignable
 class MaskLayer : UIView {
+    let maskLayer = CALayer()
     
     let gradientLayer: CAGradientLayer = {
         let gradientLayer = CAGradientLayer()
@@ -54,25 +55,29 @@ class MaskLayer : UIView {
             let image = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             
-            let maskLayer = CALayer()
             maskLayer.backgroundColor = UIColor.clearColor().CGColor
             maskLayer.frame = layer.bounds
             maskLayer.contents = image.CGImage
-            gradientLayer.mask = maskLayer
-            print("CGRectOffset(bounds, bounds.size.width, 0) = \(CGRectOffset(bounds, bounds.size.width, 0))")
-            print("maskLayer = \(maskLayer.frame)")
+//            gradientLayer.mask = maskLayer
         }
     }
     
-    override func layoutSubviews() {
-        gradientLayer.frame = CGRect(x: -bounds.size.width, y: bounds.origin.y, width: 3 * bounds.size.width, height: bounds.size.height)
-    }
+//    override func layoutSubviews() {
+//        gradientLayer.frame = CGRect(x: -bounds.size.width, y: bounds.origin.y, width: 3 * bounds.size.width, height: bounds.size.height)
+//        print("layer.frame = \(layer.frame)")
+//    }
     
     override func didMoveToWindow() {
         super.didMoveToWindow()
+        
+        gradientLayer.frame = CGRect(x: -100, y: bounds.origin.y, width: UIScreen.mainScreen().bounds.width, height: bounds.size.height)
+        print("layer.frame = \(layer.frame)")
+//        gradientLayer.borderWidth = 3.0
+//        gradientLayer.borderColor = UIColor.whiteColor().CGColor
+        
+        gradientLayer.mask = maskLayer
+        
         layer.addSublayer(gradientLayer)
-        layer.borderWidth = 3.0
-        layer.borderColor = UIColor.redColor().CGColor
         
         let animated = CABasicAnimation(keyPath: "locations")
         animated.fromValue = [0.0,0.0,0.0,0.0,0.0,0.25]

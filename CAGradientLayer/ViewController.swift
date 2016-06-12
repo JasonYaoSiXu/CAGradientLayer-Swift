@@ -17,7 +17,7 @@ class ViewController: UIViewController {
         view.backgroundColor = UIColor.darkGrayColor()
         automaticallyAdjustsScrollViewInsets = false
         
-        maskLayer.text = "Slide to reveal "
+//        maskLayer.text = "Slide to reveal "
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,9 +28,7 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
     }
-    
 
 }
 
